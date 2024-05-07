@@ -1,0 +1,36 @@
+CREATE TABLE utilisateur(
+   id_user INT AUTO_INCREMENT,
+   nom_user VARCHAR(50) NOT NULL,
+   prenom_user VARCHAR(50) NOT NULL,
+   psd_user VARCHAR(50) NOT NULL,
+   sexe_user VARCHAR(1) NOT NULL,
+   age_user VARCHAR(2) NOT NULL,
+   birthday_user VARCHAR(10) NOT NULL,
+   lang_user VARCHAR(10) NOT NULL,
+   pays_user VARCHAR(20) NOT NULL,
+   mail_user VARCHAR(100) NOT NULL,
+   mdp_user VARCHAR(30) NOT NULL,
+   descrip_user VARCHAR(200),
+   PRIMARY KEY(id_user),
+   UNIQUE(mail_user)
+);
+
+CREATE TABLE post(
+   id_post INT AUTO_INCREMENT,
+   contenu_post VARCHAR(500) NOT NULL,
+   date_post DATE NOT NULL,
+   id_user INT NOT NULL,
+   PRIMARY KEY(id_post),
+   FOREIGN KEY(id_user) REFERENCES utilisateur(id_user)
+);
+
+CREATE TABLE commentaire(
+   id_comm INT AUTO_INCREMENT,
+   contenu_comm VARCHAR(500) NOT NULL,
+   id_user INT NOT NULL,
+   id_post INT NOT NULL,
+   PRIMARY KEY(id_comm),
+   FOREIGN KEY(id_user) REFERENCES utilisateur(id_user),
+   FOREIGN KEY(id_post) REFERENCES post(id_post)
+);
+
